@@ -35,10 +35,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="./index.html">Home</a></li>
+            <li><a href="./index.php">Home</a></li>
             <li class="active"><a href="./user.php">Userübersicht</a></li>
-            <li><a href="./fridge.html">Kühlschrankübersicht</a></li>
-            <li><a href="./drinks.html">Getränkeübersicht</a></li>
+            <li><a href="./fridge.php">Kühlschrankübersicht</a></li>
+            <li><a href="./drinks.php">Getränkeübersicht</a></li>
             <li><a href="https://twitter.com/TeamMettigel">Kontakt</a></li>
             <!---<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -56,7 +56,7 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <br><br><br>User
+    <br><br><br>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -74,14 +74,12 @@
     }
     $sql = "SELECT * FROM users order by name asc";
     $result = $conn->query($sql);
-    echo "<style>table, th, td {
-        border: 1px solid black;
-    }</style>";
-    echo "<table width='1500'>";
+    echo "<div class='col-md-6'>";
+    echo "<table class='table table-striped' width='1500'>";
     echo "<tr>";
     echo "<td><b>name</b></td>";
     echo "<td><b>firstname</b></td>";
-    echo "<td><b>auth</b></td>";
+    echo "<td><b>authcode</b></td>";
     echo "<td><b>matecoins</b></td>";
     echo "</tr>";
     echo "<tr>";
@@ -96,6 +94,7 @@
       echo "</tr>";
     }
     echo "</table>";
+    echo "</div>";
     ?>
 
   </body>

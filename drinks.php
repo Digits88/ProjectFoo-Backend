@@ -35,10 +35,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="./index.html">Home</a></li>
+            <li><a href="./index.php">Home</a></li>
             <li><a href="./user.php">Userübersicht</a></li>
-            <li><a href="./fridge.html">Kühlschrankübersicht</a></li>
-            <li class="active"><a href="./drinks.html">Getränkeübersicht</a></li>
+            <li><a href="./fridge.php">Kühlschrankübersicht</a></li>
+            <li class="active"><a href="./drinks.php">Getränkeübersicht</a></li>
             <li><a href="https://twitter.com/TeamMettigel">Kontakt</a></li>
             <!---<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
