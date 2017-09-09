@@ -38,7 +38,7 @@ if($result->num_rows != 1){
                 $drinknamequery = $conn->query("SELECT * FROM drinks WHERE id=".$reporow->drinkid);
                 if($drinknamequery != false){
                     while($dringkname = mysqli_fetch_object($drinknamequery)){
-                        $dataarray = [$reporow->id, $dringkname->name, $dringkname->price, $reporow->amount];
+                        $dataarray = ["id" => $reporow->id, "name" => $dringkname->name, "price" => $dringkname->price, "amount" => $reporow->amount];
                         array_push($repoarray, $dataarray);
                     }
                 }
