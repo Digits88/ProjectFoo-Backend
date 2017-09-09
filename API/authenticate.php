@@ -20,13 +20,16 @@ if ($conn->connect_error) {
 if(!is_numeric($_POST['authcode'])){
     die("invalid parameter");
 }
-$result = $conn->query("SELECT * FROM USERS WHERE auth=".$_POST['authcode']);
+$result = $conn->query("SELECT * FROM USERS WHERE authcode=".$_POST['authcode']);
+if($result == false){
+    die(null);
+}
 if($result->num_rows != 1){
     die(null);
 }else{
     while($row = mysqli_fetch_object($result))
     {
-        die(json_encode(["name" => $row->name, "matemarken" => $row->matemarken, "matecounter" => $row->matecounter]));
+        die(json_encode(["name" => $row->name, "firstname" => $row->firstname, "matecoins" => $row->matecoins]));
     }
 }
 ?>
