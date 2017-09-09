@@ -17,8 +17,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style type="text/css">
-   table {margin-top:50px;}
-  </style>
+	 table {margin-top:50px;}
+	</style>
   </head>
   <body>
 
@@ -41,8 +41,8 @@
             <li><a href="./index.php">Home</a></li>
             <li><a href="./user.php">Userübersicht</a></li>
             <li><a href="./fridge.php">Kühlschrankübersicht</a></li>
-            <li class="active"><a href="./drinks.php">Getränkeübersicht</a></li>
-            <li><a href="./repos.php">Bestände</a></li>
+            <li><a href="./drinks.php">Getränkeübersicht</a></li>
+            <li class="active"><a href="./repos.php">Bestände</a></li>
             <li><a href="https://twitter.com/TeamMettigel">Kontakt</a></li>
             <!---<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -75,14 +75,15 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT * FROM drinks order by name asc";
+    $sql = "SELECT * FROM repositories order by name asc";
     $result = $conn->query($sql);
     echo "<div class='container'><div class='row'><div class='col-md-6'>";
     echo "<table class='table table-striped' width='1500'>";
     echo "<tr>";
     echo "<td><b>Name</b></td>";
-    echo "<td><b>Price</b></td>";
-    echo "<td><b>isCoinable</b></td>";
+    echo "<td><b>Firstname</b></td>";
+    echo "<td><b>Authcode</b></td>";
+    echo "<td><b>Matecoins</b></td>";
     echo "</tr>";
     echo "<tr>";
     echo "</tr>";
@@ -90,14 +91,9 @@
     {
       echo "<tr>";
       echo "<td>",$row->name,"</td>";
-      echo "<td>",$row->price,"</td>";
-      $test = $row->isCoinable;
-      echo $test;
-      if($test==1){
-        echo "<td>true</td>";
-      }else{
-        echo "<td>false</td>";
-      }
+      echo "<td>",$row->firstname,"</td>";
+      echo "<td>",$row->authcode,"</td>";
+      echo "<td>",$row->matecoins,"</td>";
       echo "</tr>";
     }
     echo "</table>";
@@ -107,7 +103,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <button class="btn bn-sm btn-default" onclick="window.location.href='./adddrink.html'">Add Drink</button>
+          <button class="btn bn-sm btn-default" onclick="window.location.href='./addrepo.html'">Add Repository</button>
         </div>
       </div>
     </div>

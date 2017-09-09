@@ -16,6 +16,9 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+	 table {margin-top:50px;}
+	</style>
   </head>
   <body>
 
@@ -39,6 +42,7 @@
             <li class="active"><a href="./user.php">Userübersicht</a></li>
             <li><a href="./fridge.php">Kühlschrankübersicht</a></li>
             <li><a href="./drinks.php">Getränkeübersicht</a></li>
+            <li><a href="./repos.php">Bestände</a></li>
             <li><a href="https://twitter.com/TeamMettigel">Kontakt</a></li>
             <!---<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -56,7 +60,6 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <br><br><br>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -74,13 +77,13 @@
     }
     $sql = "SELECT * FROM users order by name asc";
     $result = $conn->query($sql);
-    echo "<div class='col-md-6'>";
+    echo "<div class='container'><div class='row'><div class='col-md-6'>";
     echo "<table class='table table-striped' width='1500'>";
     echo "<tr>";
-    echo "<td><b>name</b></td>";
-    echo "<td><b>firstname</b></td>";
-    echo "<td><b>authcode</b></td>";
-    echo "<td><b>matecoins</b></td>";
+    echo "<td><b>Name</b></td>";
+    echo "<td><b>Firstname</b></td>";
+    echo "<td><b>Authcode</b></td>";
+    echo "<td><b>Matecoins</b></td>";
     echo "</tr>";
     echo "<tr>";
     echo "</tr>";
@@ -94,8 +97,15 @@
       echo "</tr>";
     }
     echo "</table>";
-    echo "</div>";
+    echo "</div></div></div>";
     ?>
 
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <button class="btn bn-sm btn-default" onclick="window.location.href='./adduser.html'">Add User</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

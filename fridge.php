@@ -16,6 +16,9 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+	 table {margin-top:50px;}
+	  </style>
   </head>
   <body>
 
@@ -39,6 +42,7 @@
             <li><a href="./user.php">Userübersicht</a></li>
             <li class="active"><a href="./fridge.php">Kühlschrankübersicht</a></li>
             <li><a href="./drinks.php">Getränkeübersicht</a></li>
+            <li><a href="./repos.php">Bestände</a></li>
             <li><a href="https://twitter.com/TeamMettigel">Kontakt</a></li>
             <!---<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -56,10 +60,50 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <br><br><br>Fridge
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+
+    <?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "foo";
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "SELECT * FROM fridges order by name asc";
+    $result = $conn->query($sql);
+    echo "<div class='container'><div class='row'><div class='col-md-6'>";
+    echo "<table class='table table-striped' width='1500'>";
+    echo "<tr>";
+    echo "<td><b>Name</b></td>";
+    echo "<td><b>Location</b></td>";
+    echo "<td><b>QR Code</b></td>";
+    echo "</tr>";
+    echo "<tr>";
+    echo "</tr>";
+    while($row = mysqli_fetch_object($result))
+    {
+      echo "<tr>";
+      echo "<td>",$row->name,"</td>";
+      echo "<td>",$row->location,"</td>";
+      echo "<td><a href='https://api.qrserver.com/v1/create-qr-code/?size=450x450&data=foo-fridge:$row->identifier'>Click here</a>";
+      echo "</tr>";
+    }
+    echo "</table>";
+    echo "</div></div></div>";
+    ?>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <button class="btn bn-sm btn-default" onclick="window.location.href='./addfridge.html'">Add Fridge</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
