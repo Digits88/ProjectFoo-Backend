@@ -54,11 +54,12 @@ while($row = mysqli_fetch_object($result)){
             $name = $drinkrow->name;
         }
     }
+    $dataarray = [];
     if($row->free == 0){
         $summe = $summe+$price;
-        $dataarray = ["name" => $name, "price" => 0];
-    }else{
         $dataarray = ["name" => $name, "price" => $price];
+    }else{
+        $dataarray = ["name" => $name, "price" => 0];
     }
     array_push($items, $dataarray);
 }

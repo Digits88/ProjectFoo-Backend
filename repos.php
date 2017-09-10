@@ -66,6 +66,7 @@
     <script src="js/bootstrap.min.js"></script>
 
     <?php
+    error_reporting(0);
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -75,26 +76,34 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT * FROM repositories order by name asc";
+    $sql = "SELECT * FROM repositories order by amount asc";
     $result = $conn->query($sql);
     echo "<div class='container'><div class='row'><div class='col-md-6'>";
     echo "<table class='table table-striped' width='1500'>";
     echo "<tr>";
-    echo "<td><b>Name</b></td>";
-    echo "<td><b>Firstname</b></td>";
-    echo "<td><b>Authcode</b></td>";
-    echo "<td><b>Matecoins</b></td>";
+    echo "<td><b>Getränk</b></td>";
+    echo "<td><b>Kühlschrank</b></td>";
+    echo "<td><b>Menge</b></td>";
     echo "</tr>";
     echo "<tr>";
     echo "</tr>";
+    if($result == false){
+      die();
+    }
     while($row = mysqli_fetch_object($result))
     {
-      echo "<tr>";
-      echo "<td>",$row->name,"</td>";
-      echo "<td>",$row->firstname,"</td>";
-      echo "<td>",$row->authcode,"</td>";
-      echo "<td>",$row->matecoins,"</td>";
-      echo "</tr>";
+      $resultdrink = $conn->query("SELECT * FROM drinks WHERE id=".$row->drinkid);
+      while($drinkrow = mysqli_fetch_object($resultdrink)){
+        $resultfridge = $conn->query("SELECT * FROM fridges WHERE id=".$row->fridgeid);
+        while($fridgerow = mysqli_fetch_object($resultfridge)){
+          echo "<tr>";
+          echo "<td>",$drinkrow->name,"</td>";
+          echo "<td>",$fridgerow->name,"</td>";
+          echo "<td>",$row->amount,"</td>";
+          echo "<td>",$row->matecoins,"</td>";
+          echo "</tr>";
+        }
+      }
     }
     echo "</table>";
     echo "</div></div></div>";

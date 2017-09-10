@@ -82,7 +82,7 @@
     echo "<tr>";
     echo "<td><b>Name</b></td>";
     echo "<td><b>Price</b></td>";
-    echo "<td><b>isCoinable</b></td>";
+    echo "<td><b>Mit Matecoins bezahlbar</b></td>";
     echo "</tr>";
     echo "<tr>";
     echo "</tr>";
