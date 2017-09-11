@@ -38,11 +38,12 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="./index.php">Home</a></li>
+            <li><a href="./index.html">Home</a></li>
             <li><a href="./user.php">Userübersicht</a></li>
             <li><a href="./fridge.php">Kühlschrankübersicht</a></li>
             <li><a href="./drinks.php">Getränkeübersicht</a></li>
             <li class="active"><a href="./repos.php">Bestände</a></li>
+            <li><a href="./balance.php">Übersicht</a></li>
             <li><a href="https://twitter.com/TeamMettigel">Kontakt</a></li>
             <!---<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -100,7 +101,6 @@
           echo "<td>",$drinkrow->name,"</td>";
           echo "<td>",$fridgerow->name,"</td>";
           echo "<td>",$row->amount,"</td>";
-          echo "<td>",$row->matecoins,"</td>";
           echo "</tr>";
         }
       }
@@ -112,7 +112,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <button class="btn bn-sm btn-default" onclick="window.location.href='./addrepo.html'">Add Repository</button>
+          <button class="btn bn-sm btn-default" onclick="window.location.href='./addrepo.php'">Add Repository</button>
         </div>
       </div>
     </div>

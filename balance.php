@@ -17,7 +17,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style type="text/css">
-	 form {margin-top:50px;}
+	 table {margin-top:50px;}
 	  </style>
   </head>
 <body>
@@ -35,11 +35,11 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li><a href="./index.html">Home</a></li>
-          <li class="active"><a href="./user.php">Userübersicht</a></li>
+          <li><a href="./user.php">Userübersicht</a></li>
           <li><a href="./fridge.php">Kühlschrankübersicht</a></li>
           <li><a href="./drinks.php">Getränkeübersicht</a></li>
           <li><a href="./repos.php">Bestände</a></li>
-          <li><a href=./balance.php>Übersicht</a></li>
+          <li class="active"><a href=./balance.php>Übersicht</a></li>
           <li><a href="https://twitter.com/TeamMettigel">Kontakt</a></li>
           <!---<li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -62,20 +62,62 @@
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="js/bootstrap.min.js"></script>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-        <form action="/adduser.php" method="POST">
-        First Name:<br>
-        <input type="text" name="firstname" id="firstname" value="">
-        <br>
-        Last Name:<br>
-        <input type="text" name="lastname" id="lastname" value = "">
-        <br>
-        <input type="submit" class="btn bn-sm btn-default" value="Submit">
-      </form>
-    </div>
-  </div>
-</div>
+  <?php
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $dbname = "foo";
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  // Check connection
+  if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+  }
+  $sql = "SELECT * FROM users order by name asc";
+  $result = $conn->query($sql);
+  echo "<div class='container'><div class='row'><div class='col-md-6'>";
+  echo "<table class='table table-striped' width='1500'>";
+  echo "<tr>";
+  echo "<td><b>Name</b></td>";
+  echo "<td><b>Firstname</b></td>";
+  echo "<td><b>Summe</b></td>";
+  echo "<td><b>Matecoins</b></td>";
+  echo "</tr>";
+  echo "<tr>";
+  echo "</tr>";
+  while($row = mysqli_fetch_object($result))
+  {
+    $summe = 0;
+    $takeoutsresult = $conn->query("SELECT * FROM take_outs WHERE userid=".$row->id);
+    if($takeoutsresult == false){
+      echo "<tr>";
+      echo "<td>",$row->name,"</td>";
+      echo "<td>",$row->firstname,"</td>";
+      echo "<td>0</td>";
+      echo "<td>",$row->matecoins,"</td>";
+      echo "</tr>";
+    }else{
+      while($takeoutrows = mysqli_fetch_object($takeoutsresult)){
+        if($takeoutrows->free != 1){
+          $reporesult = $conn->query("SELECT * FROM repositories WHERE id=".$takeoutrows->repositryid);
+          while($reporows = mysqli_fetch_object($reporesult)){
+            $drinkresult = $conn->query("SELECT * FROM drinks WHERE id=".$reporows->drinkid);
+            while($drinkrows = mysqli_fetch_object($drinkresult)){
+              $summe = $summe+$drinkrows->price;
+            }
+          }
+        }
+      }
+      echo "<tr>";
+      echo "<td>",$row->name,"</td>";
+      echo "<td>",$row->firstname,"</td>";
+      echo "<td>",$summe,"</td>";
+      echo "<td>",$row->matecoins,"</td>";
+      echo "</tr>";
+    }
+    
+  }
+  echo "</table>";
+  echo "</div></div></div>";
+  ?>
 </body>
 </html>

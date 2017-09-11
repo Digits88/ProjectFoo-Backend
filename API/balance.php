@@ -22,6 +22,7 @@ if ($conn->connect_error) {
 
 //Warning: SQL-Injection
 $result = $conn->query("SELECT * FROM users WHERE authcode='".$_POST['authcode']."'");
+$matecoins = 0;
 
 if($result == false){
     die("no such user");
@@ -30,13 +31,14 @@ if($result == false){
 $id = -1;
 while($row = mysqli_fetch_object($result)){
     $id = $row->id;
+    $matecoins = $row->matecoins;
 }
 
 $result = $conn->query("SELECT * FROM take_outs WHERE userid=".$id);
 
 if($result == false){
     $array = [];
-    die(json_encode(["items" => $array, "summer" => 0]));
+    die(json_encode(["items" => $array, "matecoins" => $matecoins, "summer" => 0]));
 }
 
 $summe = 0;
@@ -64,5 +66,5 @@ while($row = mysqli_fetch_object($result)){
     array_push($items, $dataarray);
 }
 
-echo json_encode(["items" => $items, "summe" => $summe]);
+echo json_encode(["items" => $items, "matecoins" => $matecoins, "summe" => $summe]);
 ?>
